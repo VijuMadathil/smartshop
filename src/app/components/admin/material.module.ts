@@ -12,13 +12,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-
+import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
-  imports: [CommonModule, MatMenuModule, MatButtonModule, MatToolbarModule, MatNativeDateModule, MatDatepickerModule,
-     MatIconModule, MatSidenavModule, MatListModule],
-  exports: [FormsModule, MatDialogModule, MatFormFieldModule,
+  imports: [CommonModule, MatCardModule, MatMenuModule, MatButtonModule, MatToolbarModule, MatNativeDateModule, MatDatepickerModule,
+    MatSnackBarModule, MatIconModule, MatSidenavModule, MatListModule],
+  exports: [FormsModule, MatCardModule, MatDialogModule, MatFormFieldModule,
    MatInputModule, CommonModule, MatMenuModule, MatButtonModule, MatToolbarModule,
-   MatNativeDateModule, MatDatepickerModule,
+   MatNativeDateModule, MatDatepickerModule, MatSnackBarModule,
      MatIconModule, MatSidenavModule, MatListModule],
 })
 export class CustomMaterialModule { }

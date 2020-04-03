@@ -8,16 +8,14 @@
     <div fxLayout="row" fxShow="false" fxLayoutAlign="center" fxShow.gt-sm>
         <button mat-button routerLink="/dashboard">Dashboard</button>
         <button mat-button routerLink="/products">Products</button>
-        <button mat-button routerLink="/products">Categories</button>
+        <button mat-button routerLink="/categories">Categories</button>
+        <button mat-button routerLink="/store">Store</button>
         <span class="example-spacer"></span>
     </div>
-    <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
-        <img src="{{user.photoURL}}" class="align-self-start mr-1 img-thumbnail rounded-circle"
-        alt="{{user.displayName}}">
-    </button>
+    <button mat-button [mat-menu-trigger-for]="menu"><img src="{{user.photoURL}}" class="align-self-start mr-1 img-thumbnail rounded-circle"
+        alt="{{user.displayName}}"></button>
 </mat-toolbar>
 <mat-menu x-position="before" #menu="matMenu">
     <button mat-menu-item routerLink="/dashboard">Profile</button>
-    <button mat-menu-item routerLink="/logout">Logout</button>
-    <!--<button mat-menu-item>Help</button>-->
+    <button mat-menu-item (click)="authService.SignOut()" routerLink="">Logout</button>
 </mat-menu>
