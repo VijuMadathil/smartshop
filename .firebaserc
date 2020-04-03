@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "smartshop-1885c": {
+      "hosting": {
+        "smartshop": [
+          "smartshop-1885c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "staging": "smartshop-1885c"
+  }
+}

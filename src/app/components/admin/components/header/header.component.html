@@ -1,0 +1,23 @@
+
+<mat-toolbar color="primary">
+    <button mat-button routerLink="/">
+    <!-- <mat-icon>home</mat-icon>  -->
+        {{websiteName}}</button>
+    <!-- This fills the remaining space of the current row -->
+    <span class="menu-spacer"></span>
+    <div fxLayout="row" fxShow="false" fxLayoutAlign="center" fxShow.gt-sm>
+        <button mat-button routerLink="/dashboard">Dashboard</button>
+        <button mat-button routerLink="/products">Products</button>
+        <button mat-button routerLink="/products">Categories</button>
+        <span class="example-spacer"></span>
+    </div>
+    <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+        <img src="{{user.photoURL}}" class="align-self-start mr-1 img-thumbnail rounded-circle"
+        alt="{{user.displayName}}">
+    </button>
+</mat-toolbar>
+<mat-menu x-position="before" #menu="matMenu">
+    <button mat-menu-item routerLink="/dashboard">Profile</button>
+    <button mat-menu-item routerLink="/logout">Logout</button>
+    <!--<button mat-menu-item>Help</button>-->
+</mat-menu>

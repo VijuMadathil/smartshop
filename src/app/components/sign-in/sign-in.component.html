@@ -1,0 +1,50 @@
+<!-- Main Content -->
+<div class="container-fluid">
+  <div class="row main-content bg-success text-center">
+    <div class="col-md-5 text-center company__info">
+      <!-- <span class="company__logo"><h2><span class="fa fa-android"></span></h2></span> -->
+      <img class="navbar-Brandlogo" src="assets/images/logo.png" alt="Site Logo">
+      <h4 class="company_title mat-display-1">SmartShopper</h4>
+    </div>
+    <div class="col-md-7 col-xs-12 col-sm-12 login_form ">
+      <div class="container-fluid">
+        <!-- <div class="row" style="text-align: center;">
+          <h2>Log In</h2>
+        </div>
+        <div class="row">
+          <form control="" class="form-group">
+            <div class="row">
+              <input type="text" name="username" id="username" class="form__input" placeholder="Username">
+            </div>
+            <div class="row">
+              <input type="password" name="password" id="password" class="form__input" placeholder="Password">
+            </div>
+            <div class="row">
+              <input type="checkbox" name="remember_me" id="remember_me">
+              <label for="remember_me">Remember Me!</label>
+            </div>
+            <div class="row">
+              <input type="submit" value="Submit" class="btn">
+            </div>
+          </form>
+        </div> -->
+        <!-- Calling GoogleAuth Api from AuthService -->
+        <div class="formGroup">
+          <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
+            <i class="fab fa-google-plus-g"></i>
+            Log in with Google
+          </button>
+        </div>
+        <div class="formGroup">
+          <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
+            <i class="fab fa-facebook-square"></i>
+            Log in with Facebook
+          </button>
+        </div>
+        <div class="row">
+          <p>Don't have an account? <a href="#">Register Here</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
