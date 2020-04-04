@@ -19,8 +19,6 @@ export interface Product {
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent {
-  private productsCounter = 0;
-  private db: any;
   product: Product;
   productsCollectionRef: AngularFirestoreCollection<Product>;
   products$: Observable<Product[]>;
