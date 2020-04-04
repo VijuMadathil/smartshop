@@ -22,16 +22,13 @@
                 <input matInput formControlName="imageURL">
                 </mat-form-field>
             </div>
-            <button mat-stroked-button (click)="openSnackBar()" type="submit">Add Product</button>
-            <button mat-stroked-button (click)="openSnackBar()" aria-label="Show an example snack-bar">
-                Pizza party
-            </button>
+            <button mat-stroked-button [disabled]="addProductForm.valid" type="submit">Add Product</button>
         </form>
     </mat-card>
     <mat-card>
         <mat-toolbar color="secondary"></mat-toolbar>
         <div class="container" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="center">
-            <mat-card class="product" fxFlex="20%" *ngFor="let product of products$ | async" [style.margin-top]="12">
+            <mat-card class="product" fxFlex="22%" *ngFor="let product of products$ | async" [style.margin-top]="12">
                 <mat-card-header>
                     <mat-card-title>{{  product.productName }}</mat-card-title>
                     <mat-card-subtitle>PRICE: {{ product.productPrice }} &euro;</mat-card-subtitle>

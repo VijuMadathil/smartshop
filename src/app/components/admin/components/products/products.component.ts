@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 
 export interface Product {
     id?: string;
@@ -17,7 +18,7 @@ export interface Product {
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
   private productsCounter = 0;
   private db: any;
   product: Product;
@@ -52,21 +53,28 @@ export class ProductsComponent implements OnInit {
   AddProduct() {
     // console.log(this.addProductForm.value);
     this.productsCollectionRef.add(this.addProductForm.value);
+    this.snackBar.openFromComponent(NotificationComponent, {
+      data: 'Added the product' + this.addProductForm.value.productName
+    });
   }
 
   deleteProduct(product: Product) {
     this.productsCollectionRef.doc(product.id).delete();
-  }
-
-  openSnackBar() {
     this.snackBar.openFromComponent(NotificationComponent, {
-      duration: this.durationInSeconds * 1000,
+      data: 'Deleted the product ' + product.productName
     });
   }
 
-  ngOnInit(): void {
-  }
-
+  // openSnackBar() {
+  //   this.snackBar.openFromComponent(NotificationComponent, {
+  //     data: 'some data'
+  //   });
+    // openSnackBar(message: string) {
+    //   this._snackBar.open(message, action, {
+    //     duration: 2000,
+    //   });
+    // }
+  // }
 }
 
 /**
@@ -76,7 +84,7 @@ export class ProductsComponent implements OnInit {
   selector: 'app-notification',
   template: `
     <span class="example-pizza-party">
-      Product Added!!! 🍕
+      {{data}}!!!
     </span>
   `,
   styles: [`
@@ -87,6 +95,6 @@ export class ProductsComponent implements OnInit {
 })
 export class NotificationComponent {
   durationInSeconds = 5;
-
-  constructor() {}
+  msg: 'hi';
+  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) { }
 }
