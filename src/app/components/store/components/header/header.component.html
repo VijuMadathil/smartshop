@@ -1,0 +1,20 @@
+
+<mat-toolbar color="primary"class="mat-elevation-z8">
+    <button mat-button routerLink="/">
+    <!-- <mat-icon>home</mat-icon>  -->
+        {{websiteName}}</button>
+    <!-- This fills the remaining space of the current row -->
+    <span class="menu-spacer"></span>
+    <div fxLayout="row" fxShow="false" fxLayoutAlign="center" fxShow.gt-sm>
+        <mat-icon class="pointer">shopping_cart</mat-icon>
+        <!-- <button mat-button routerLink="/store">Store</button> -->
+        <span class="example-spacer"></span>
+    </div>
+    <button mat-button [mat-menu-trigger-for]="menu"><img src="{{user.photoURL}}" class="align-self-start mr-1 img-thumbnail rounded-circle"
+        alt="{{user.displayName}}"></button>
+</mat-toolbar>
+<mat-menu x-position="before" #menu="matMenu">
+    <button mat-menu-item routerLink="/dashboard">Profile</button>
+    <button mat-menu-item routerLink="/admin">Admin</button>
+    <button mat-menu-item (click)="authService.SignOut()" routerLink="">Logout</button>
+</mat-menu>

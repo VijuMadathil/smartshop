@@ -25,7 +25,8 @@ const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'todo', component: TodoComponent, canActivate: [AuthGuard]},
-  { path: 'admin/*', loadChildren: () => import('../../components/admin/admin.module').then(m => m.AdminModule) }
+  { path: 'admin/*', loadChildren: () => import('../../components/admin/admin.module').then(m => m.AdminModule) },
+  { path: 'store', loadChildren: () => import('../../components/store/store.module').then(m => m.StoreModule) }
 ];
 
 @NgModule({

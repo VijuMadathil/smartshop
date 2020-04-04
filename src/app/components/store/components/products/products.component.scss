@@ -1,0 +1,30 @@
+.img-thumbnail {
+    height: 160px;
+    border: none;
+}
+
+.container {
+    margin: 0px;
+    padding: 0px;
+    margin: auto;
+}
+
+.product {
+    margin-top: 5px;
+}
+
+.card-actions-container {
+    float: right;
+}
+
+.mat-card-actions {
+    // ...
+    justify-content: flex-end;
+    &[align='end'] {
+      justify-content: flex-end;
+    }
+  
+    &[align='center'] {
+      justify-content: center;
+    }
+}
