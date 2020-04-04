@@ -25,7 +25,7 @@ export class ProductsComponent {
   productsCollectionRef: AngularFirestoreCollection<Product>;
   products$: Observable<Product[]>;
   addProductForm: FormGroup;
-  durationInSeconds = 5;
+  durationInSeconds = 1;
 
   constructor(fb: FormBuilder, private afs: AngularFirestore, private snackBar: MatSnackBar) {
     this.addProductForm = fb.group({
@@ -54,6 +54,7 @@ export class ProductsComponent {
     // console.log(this.addProductForm.value);
     this.productsCollectionRef.add(this.addProductForm.value);
     this.snackBar.openFromComponent(NotificationComponent, {
+      duration: this.durationInSeconds * 1300,
       data: 'Added the product' + this.addProductForm.value.productName
     });
   }
@@ -61,6 +62,7 @@ export class ProductsComponent {
   deleteProduct(product: Product) {
     this.productsCollectionRef.doc(product.id).delete();
     this.snackBar.openFromComponent(NotificationComponent, {
+      duration: this.durationInSeconds * 1300,
       data: 'Deleted the product ' + product.productName
     });
   }
@@ -89,7 +91,7 @@ export class ProductsComponent {
   `,
   styles: [`
     .example-pizza-party {
-      color: hotpink;
+      color: white;
     }
   `],
 })
