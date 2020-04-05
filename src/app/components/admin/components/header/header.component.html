@@ -6,10 +6,11 @@
     <!-- This fills the remaining space of the current row -->
     <span class="menu-spacer"></span>
     <div fxLayout="row" fxShow="false" fxLayoutAlign="center" fxShow.gt-sm>
-        <button mat-button routerLink="/dashboard">Dashboard</button>
-        <button mat-button routerLink="/products">Products</button>
-        <button mat-button routerLink="/categories">Categories</button>
-        <button mat-button routerLink="/store">Store</button>
+        <!-- <button mat-button routerLink="/dashboard">Dashboard</button> -->
+        <button mat-button routerLink="/admin/products">Products</button>
+        <button mat-button routerLink="/admin/categories">Categories</button>
+        <button mat-button routerLink="/admin/store">Store Setting</button>
+        <button mat-button routerLink="/store">www.smartshopper.com</button>
         <span class="example-spacer"></span>
     </div>
     <button mat-button [mat-menu-trigger-for]="menu"><img src="{{user.photoURL}}" class="align-self-start mr-1 img-thumbnail rounded-circle"
