@@ -16,12 +16,14 @@ import {
   Orientation
 } from '@ngmodule/material-carousel';
 import { ProductsComponent } from './components/products/products.component';
+import { CartComponent } from './components/cart/cart.component';
+import { ContactInfoBarComponent } from './components/contact-info-bar/contact-info-bar.component';
 
 // Flex Layout Module
 // import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
-  declarations: [StoreComponent, CarousalComponent, HeaderComponent, ProductsComponent],
+  declarations: [StoreComponent, CarousalComponent, HeaderComponent, ProductsComponent, CartComponent, ContactInfoBarComponent],
   imports: [
     CommonModule,
     StoreRoutingModule,

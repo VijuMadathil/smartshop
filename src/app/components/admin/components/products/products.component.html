@@ -27,17 +27,17 @@
     </mat-card>
     <mat-card>
         <mat-toolbar color="secondary"></mat-toolbar>
-        <div class="container" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="center">
+        <div class="container" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="center center">
             <mat-card class="product" fxFlex="22%" *ngFor="let product of products$ | async" [style.margin-top]="12">
                 <mat-card-header>
                     <mat-card-title>{{  product.productName }}</mat-card-title>
                     <mat-card-subtitle>PRICE: {{ product.productPrice }} &euro;</mat-card-subtitle>
                 </mat-card-header>
-                <mat-card-content>
+                <mat-card-content fxLayoutAlign="center center">
                     <img src="{{product.imageURL}}" class="align-self-start mr-1 img-thumbnail"
                 alt="{{product.productName}}">
                 </mat-card-content>
-                <mat-card-actions>
+                <mat-card-actions fxLayoutAlign="center center">
                     <button mat-button><mat-icon aria-hidden="false" aria-label="Edit icon">edit</mat-icon></button>
                     <button mat-button (click)="deleteProduct(product)"><mat-icon aria-hidden="false" aria-label="Delete icon">delete</mat-icon></button>
                     <!-- <button mat-button>Edit</button>

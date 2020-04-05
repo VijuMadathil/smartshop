@@ -1,4 +1,4 @@
-
+<app-contact-info-bar></app-contact-info-bar>
 <mat-toolbar color="primary"class="mat-elevation-z8">
     <button mat-button routerLink="/">
     <!-- <mat-icon>home</mat-icon>  -->
@@ -10,8 +10,13 @@
         <!-- <button mat-button routerLink="/store">Store</button> -->
         <span class="example-spacer"></span>
     </div>
-    <button mat-button [mat-menu-trigger-for]="menu"><img src="{{user.photoURL}}" class="align-self-start mr-1 img-thumbnail rounded-circle"
-        alt="{{user.displayName}}"></button>
+    <button mat-button [mat-menu-trigger-for]="menu">
+        <div fxLayout="row wrap" fxLayoutAlign="center center">
+            <img src="{{user.photoURL}}" class="align-self-start mr-1 img-thumbnail rounded-circle"
+            alt="{{user.displayName}}">
+            <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong>
+        </div>
+    </button>
 </mat-toolbar>
 <mat-menu x-position="before" #menu="matMenu">
     <button mat-menu-item routerLink="/dashboard">Profile</button>
