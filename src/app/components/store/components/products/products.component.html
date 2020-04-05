@@ -5,7 +5,9 @@
      fxLayoutGap="5px"
      fxLayoutGap.xs="0">
     <mat-card>
-        <mat-toolbar color="secondary"></mat-toolbar>
+        <mat-toolbar color="secondary">
+            <app-search-bar></app-search-bar>
+        </mat-toolbar>
         <div class="container" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="2px" fxLayoutAlign="center center">
             <mat-card class="product" fxFlex="22%" *ngFor="let product of products$ | async" [style.margin-top]="12">
                 <mat-card-header>

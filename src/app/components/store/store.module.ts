@@ -18,12 +18,14 @@ import {
 import { ProductsComponent } from './components/products/products.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ContactInfoBarComponent } from './components/contact-info-bar/contact-info-bar.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 // Flex Layout Module
 // import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
-  declarations: [StoreComponent, CarousalComponent, HeaderComponent, ProductsComponent, CartComponent, ContactInfoBarComponent],
+  declarations: [StoreComponent, CarousalComponent, HeaderComponent, ProductsComponent, 
+    CartComponent, ContactInfoBarComponent, SearchBarComponent],
   imports: [
     CommonModule,
     StoreRoutingModule,

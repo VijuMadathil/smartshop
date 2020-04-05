@@ -1,0 +1,25 @@
+<form class="search-form">
+    <mat-form-field class="search-full-width">
+        <input type="text"
+                placeholder="Search Product"
+                aria-label="Number"
+                matInput
+                
+                [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of options" [value]="option">
+            {{option}}
+        </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</form>
+<!-- <p>Search product:</p>
+<div class="search-input">
+    <input type="text" #query (input)="change(query.value)" class="queryInput" >
+</div> -->
+<!-- <div class="menu" [ngClass]="{'products-list': products.length > 0}">
+  <div class="item product-item" *ngFor="let product of products" (click)="onSelect(product.id)">
+    <img class="ui mini avatar image" [src]="product.imageUrl">
+    {{product.name}}
+  </div>
+</div> -->
