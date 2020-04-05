@@ -19,6 +19,8 @@ import { ProductsComponent } from './components/products/products.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ContactInfoBarComponent } from './components/contact-info-bar/contact-info-bar.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductService } from './services/product.service';
 
 // Flex Layout Module
 // import { FlexLayoutModule } from '@angular/flex-layout';
@@ -32,7 +34,10 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     CustomMaterialModule,
     // FlexLayoutModule,
     MatCarouselModule,
-    FlexLayoutModule
-  ]
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  providers: [ProductService]
 })
 export class StoreModule { }
