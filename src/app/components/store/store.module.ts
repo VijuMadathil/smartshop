@@ -21,13 +21,14 @@ import { ContactInfoBarComponent } from './components/contact-info-bar/contact-i
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductService } from './services/product.service';
+import { AddressbookComponent } from './components/addressbook/addressbook.component';
 
 // Flex Layout Module
 // import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [StoreComponent, CarousalComponent, HeaderComponent, ProductsComponent, 
-    CartComponent, ContactInfoBarComponent, SearchBarComponent],
+    CartComponent, ContactInfoBarComponent, SearchBarComponent, AddressbookComponent],
   imports: [
     CommonModule,
     StoreRoutingModule,
