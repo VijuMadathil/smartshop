@@ -11,16 +11,17 @@ interface DialogData {
   styleUrls: ['./addressbook.component.scss']
 })
 export class AddressbookComponent implements OnInit {
+  selectedAddress: string;
+  addressList: string[] = ['Address1', 'Address2', 'Address3'];
 
   constructor(
     public dialogRef: MatDialogRef<AddressbookComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

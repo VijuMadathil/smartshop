@@ -15,10 +15,11 @@ import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
   imports: [CommonModule, MatCardModule, MatMenuModule, MatButtonModule, MatToolbarModule, MatNativeDateModule, MatDatepickerModule,
-    MatSnackBarModule, MatIconModule, MatSidenavModule, MatListModule, MatAutocompleteModule],
-  exports: [FormsModule, MatCardModule, MatDialogModule, MatFormFieldModule,
+    MatSnackBarModule, MatIconModule, MatSidenavModule, MatListModule, MatAutocompleteModule, MatRadioModule],
+  exports: [FormsModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatRadioModule,
    MatInputModule, CommonModule, MatMenuModule, MatButtonModule, MatToolbarModule,
    MatNativeDateModule, MatDatepickerModule, MatSnackBarModule, MatAutocompleteModule,
      MatIconModule, MatSidenavModule, MatListModule],
