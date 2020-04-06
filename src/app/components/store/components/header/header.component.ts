@@ -19,6 +19,9 @@ export class HeaderComponent implements OnInit {
   }
 
   openAddressBook(): void {
+    if (this.dialog.openDialogs.length === 1) {
+      return;
+    }
     const dialogRef = this.dialog.open(AddressbookComponent);
 
     dialogRef.afterClosed().subscribe(result => {
