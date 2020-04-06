@@ -1,0 +1,29 @@
+<app-contact-info-bar></app-contact-info-bar>
+<mat-toolbar fxLayout="row"  color="primary" class="mat-elevation-z8">
+    <button mat-button routerLink="/">
+        {{websiteName}}</button>
+    <!-- This fills the remaining space of the current row -->
+    <span class="menu-spacer"></span>
+    <div>
+        <button mat-button (click)="openAddressBook()"><mat-icon class="pointer">location_on</mat-icon>Deliver to...</button>
+    </div>
+    <div>
+        <button mat-button (click)="openAddressBook()"><mat-icon class="pointer">shopping_cart</mat-icon>Cart</button>
+    </div>
+    <button mat-button [mat-menu-trigger-for]="menu">
+        <div *ngIf="authService.isLoggedIn" fxLayout="row wrap" fxLayoutAlign="center center">
+            <img src="{{user.photoURL}}" class="align-self-start mr-1 img-thumbnail rounded-circle" alt="{{user.displayName}}">
+            <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong>
+        </div>
+        <div *ngIf="!authService.isLoggedIn" fxLayout="row wrap" fxLayoutAlign="center center">
+            <img src="{{defaultUsrImgUrl}}" class="align-self-start mr-1 img-thumbnail rounded-circle">
+            <strong>User</strong>
+        </div>
+    </button>
+</mat-toolbar>
+<mat-menu x-position="before" #menu="matMenu">
+    <button *ngIf="!authService.isLoggedIn"mat-menu-item (click)="authService.GoogleAuth()" routerLink="">Login</button>
+    <button *ngIf="authService.isLoggedIn" mat-menu-item routerLink="/dashboard">Profile</button>
+    <button *ngIf="authService.isLoggedIn" mat-menu-item routerLink="/admin">Admin</button>
+    <button *ngIf="authService.isLoggedIn"mat-menu-item (click)="authService.SignOut()" routerLink="">Logout</button>
+</mat-menu>

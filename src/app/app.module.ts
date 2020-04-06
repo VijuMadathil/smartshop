@@ -7,24 +7,20 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 // Auth service
-import { AuthService } from './shared/services/auth.service';
+import { AuthService } from './coreModule/services/auth.service';
 
-import { AppRoutingModule } from './shared/routing/app-routing.module';
+import { AppRoutingModule } from './coreModule/routing/app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { SignInComponent } from './components/sign-in/sign-in.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { DashboardComponent } from './featureModules/dashboard/dashboard.component';
+import { SignInComponent } from './sharedModule/components/sign-in/sign-in.component';
+import { SignUpComponent } from './sharedModule/components/sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './sharedModule/components/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './sharedModule/components/verify-email/verify-email.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TodoComponent } from './components/todo/todo.component';
-
-// Admin Module
-import { AdminModule } from './components/admin/admin.module';
 
 // shared Components
-import { FooterComponent } from './shared/components/footer/footer.component';
-import { HeaderComponent } from './shared/components/header/header.component';
+import { FooterComponent } from './sharedModule/components/footer/footer.component';
+import { HeaderComponent } from './sharedModule/components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +30,6 @@ import { HeaderComponent } from './shared/components/header/header.component';
     SignUpComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
-    TodoComponent,
     FooterComponent,
     HeaderComponent,
   ],
@@ -45,7 +40,6 @@ import { HeaderComponent } from './shared/components/header/header.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AdminModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
