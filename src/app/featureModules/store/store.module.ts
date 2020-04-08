@@ -20,7 +20,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { ContactInfoBarComponent } from './components/contact-info-bar/contact-info-bar.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProductService } from './services/product.service';
+import { ProductService } from './services/productService/product.service';
 import { AddressbookComponent } from './components/addressbook/addressbook.component';
 
 @NgModule({

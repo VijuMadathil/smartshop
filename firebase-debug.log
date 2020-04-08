@@ -1,0 +1,38 @@
+[debug] [2020-04-06T20:12:09.887Z] ----------------------------------------------------------------------
+[debug] [2020-04-06T20:12:09.889Z] Command:       /usr/local/bin/node /usr/local/bin/firebase emulators:start
+[debug] [2020-04-06T20:12:09.889Z] CLI Version:   7.15.1
+[debug] [2020-04-06T20:12:09.889Z] Platform:      darwin
+[debug] [2020-04-06T20:12:09.889Z] Node Version:  v10.16.1
+[debug] [2020-04-06T20:12:09.890Z] Time:          Mon Apr 06 2020 22:12:09 GMT+0200 (Central European Summer Time)
+[debug] [2020-04-06T20:12:09.890Z] ----------------------------------------------------------------------
+[debug] [2020-04-06T20:12:09.890Z] 
+[debug] [2020-04-06T20:12:09.899Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-04-06T20:12:09.899Z] > authorizing via signed-in user
+[info] i  emulators: Starting emulators: firestore, hosting
+[debug] [2020-04-06T20:12:09.956Z] [hub] writing locator at /var/folders/d7/cp8qp0yj4999_sxk2b9zckc80000gn/T/hub-smartshop-1885c.json
+[info] ✔  hub: emulator hub started at http://localhost:4400
+[info] i  firestore: Serving ALL traffic (including WebChannel) on http://localhost:8080
+[warn] ⚠  firestore: Support for WebChannel on a separate port (8081) is DEPRECATED and will go away soon. Please use port above instead.
+[debug] [2020-04-06T20:12:10.044Z] Ignoring unsupported arg: projectId
+[debug] [2020-04-06T20:12:10.044Z] Ignoring unsupported arg: auto_download
+[debug] [2020-04-06T20:12:10.044Z] Starting firestore emulator with command {"binary":"java","args":["-Duser.language=en","-jar","/Users/jessin/.cache/firebase/emulators/cloud-firestore-emulator-v1.11.1.jar","--host","localhost","--port",8080,"--rules","/Users/jessin/Lab/work/FE/smartshop/firestore.rules","--webchannel_port",8081],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator","seed_from_export"],"joinArgs":false}
+[info] i  firestore: firestore emulator logging to firestore-debug.log
+[debug] [2020-04-06T20:12:11.571Z] API endpoint: http://localhost
+[debug] [2020-04-06T20:12:11.571Z] :8080
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=localhost:
+[debug] [2020-04-06T20:12:11.571Z] 8080
+
+Dev App Server is now running.
+
+
+[info] ✔  firestore: firestore emulator started at http://localhost:8080
+[info] i  firestore: For testing set FIRESTORE_EMULATOR_HOST=localhost:8080
+[debug] [2020-04-06T20:12:11.609Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/smartshop-1885c/webApps/-/config  
+ 
+[debug] [2020-04-06T20:12:12.354Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: /dist/smartshop
+[info] ✔  hosting: Local server: http://localhost:5000
+[info] ✔  hosting: hosting emulator started at http://localhost:5000
+[info] ✔  emulators: All emulators started, it is now safe to connect.

@@ -16,12 +16,17 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatTableModule } from '@angular/material/table';
+import { MatDividerModule } from '@angular/material/divider';
+
 @NgModule({
-  imports: [CommonModule, MatCardModule, MatMenuModule, MatButtonModule, MatToolbarModule, MatNativeDateModule, MatDatepickerModule,
+  imports: [CommonModule, MatCardModule, MatMenuModule, MatButtonModule, MatToolbarModule,
+    MatNativeDateModule, MatDatepickerModule, MatBadgeModule, MatTableModule, MatDividerModule,
     MatSnackBarModule, MatIconModule, MatSidenavModule, MatListModule, MatAutocompleteModule, MatRadioModule],
   exports: [FormsModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatRadioModule,
-   MatInputModule, CommonModule, MatMenuModule, MatButtonModule, MatToolbarModule,
-   MatNativeDateModule, MatDatepickerModule, MatSnackBarModule, MatAutocompleteModule,
-     MatIconModule, MatSidenavModule, MatListModule],
+   MatInputModule, CommonModule, MatMenuModule, MatButtonModule, MatToolbarModule, MatTableModule,
+   MatNativeDateModule, MatDatepickerModule, MatSnackBarModule, MatAutocompleteModule, MatDividerModule,
+     MatIconModule, MatSidenavModule, MatListModule, MatBadgeModule],
 })
 export class CustomMaterialModule { }

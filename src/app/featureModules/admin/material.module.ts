@@ -14,10 +14,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
 @NgModule({
   imports: [CommonModule, MatCardModule, MatMenuModule, MatButtonModule, MatToolbarModule, MatNativeDateModule, MatDatepickerModule,
-    MatSnackBarModule, MatIconModule, MatSidenavModule, MatListModule],
-  exports: [FormsModule, MatCardModule, MatDialogModule, MatFormFieldModule,
+    MatSnackBarModule, MatIconModule, MatSidenavModule, MatListModule, MatDividerModule],
+  exports: [FormsModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatDividerModule,
    MatInputModule, CommonModule, MatMenuModule, MatButtonModule, MatToolbarModule,
    MatNativeDateModule, MatDatepickerModule, MatSnackBarModule,
      MatIconModule, MatSidenavModule, MatListModule],

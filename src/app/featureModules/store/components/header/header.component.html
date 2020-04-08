@@ -1,5 +1,5 @@
 <app-contact-info-bar></app-contact-info-bar>
-<mat-toolbar fxLayout="row"  color="primary" class="mat-elevation-z8">
+<mat-toolbar fxLayout="row" color="primary" class="mat-elevation-z8">
     <button mat-button routerLink="/">
         {{websiteName}}</button>
     <!-- This fills the remaining space of the current row -->
@@ -8,7 +8,9 @@
         <button mat-button (click)="openAddressBook()"><mat-icon class="pointer">location_on</mat-icon>Deliver to...</button>
     </div>
     <div>
-        <button mat-button (click)="openAddressBook()"><mat-icon class="pointer">shopping_cart</mat-icon>Cart</button>
+        <button mat-button (click)="getCart()" [mat-menu-trigger-for]="cartSnapshot"><mat-icon class="pointer">shopping_cart</mat-icon>
+            <span matBadge="{{totalItems}}" matBadgeOverlap="false">Cart</span>
+        </button>
     </div>
     <button mat-button [mat-menu-trigger-for]="menu">
         <div *ngIf="authService.isLoggedIn" fxLayout="row wrap" fxLayoutAlign="center center">
@@ -21,6 +23,37 @@
         </div>
     </button>
 </mat-toolbar>
+<mat-menu x-position="before" #cartSnapshot="matMenu">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-subtitle>Shopping Cart items</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content fxLayout="column">
+            <div fxLayout="row" *ngFor="let product of products">
+                <div>
+                    <p>{{product.productName}}</p>
+                    <div fxLayout="row" fxLayoutAlign="space-between">
+                        <img class="cartImg" [src]="product.imageURL">
+                        <span fxLayout="row" fxLayoutAlign="end">
+                            <p>{{product.productPrice}} x {{product.items}}={{product.items*product.productPrice}}</p>
+                        </span>
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+            </div>
+            <div>
+                <strong>Total: {{getTotalCost()}} &euro;</strong>
+                <mat-divider></mat-divider>
+            </div>
+        </mat-card-content>
+        <div class="card-actions-container" fxLayoutAlign="end end">
+            <mat-card-actions>
+                <button mat-button><mat-icon class="pointer">remove_shopping_cart</mat-icon>Clear Cart</button>
+                <button mat-button><mat-icon class="pointer">payment</mat-icon>Checkout</button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+</mat-menu>
 <mat-menu x-position="before" #menu="matMenu">
     <button *ngIf="!authService.isLoggedIn"mat-menu-item (click)="authService.GoogleAuth()" routerLink="">Login</button>
     <button *ngIf="authService.isLoggedIn" mat-menu-item routerLink="/dashboard">Profile</button>
