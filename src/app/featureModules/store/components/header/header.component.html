@@ -9,7 +9,7 @@
     </div>
     <div>
         <button mat-button (click)="getCart()" [mat-menu-trigger-for]="cartSnapshot"><mat-icon class="pointer">shopping_cart</mat-icon>
-            <span matBadge="{{totalItems}}" matBadgeOverlap="false">Cart</span>
+            <span *ngFor="let product of cart$ | async" matBadge="{{product.cart.length}}" matBadgeOverlap="false">Cart</span>
         </button>
     </div>
     <button mat-button [mat-menu-trigger-for]="menu">
@@ -28,14 +28,13 @@
         <mat-card-header>
             <mat-card-subtitle>Shopping Cart items</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content fxLayout="column">
-            <div fxLayout="row" *ngFor="let product of products">
-                <div>
-                    <p>{{product.productName}}</p>
+        <mat-card-content>
+            <div fxLayout="column" *ngFor="let product of cart$ | async">
+                <div *ngFor="let cartItem of product.cart">
                     <div fxLayout="row" fxLayoutAlign="space-between">
-                        <img class="cartImg" [src]="product.imageURL">
-                        <span fxLayout="row" fxLayoutAlign="end">
-                            <p>{{product.productPrice}} x {{product.items}}={{product.items*product.productPrice}}</p>
+                        <img class="cartImg" [src]="cartItem.imageURL">
+                        <span fxLayout="column" fxLayoutAlign="end">
+                            <p>{{cartItem.productPrice}} x {{cartItem.items}}={{cartItem.items*cartItem.productPrice}}</p>
                         </span>
                     </div>
                     <mat-divider></mat-divider>

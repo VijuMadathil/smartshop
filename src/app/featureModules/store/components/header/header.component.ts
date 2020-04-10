@@ -3,6 +3,7 @@ import { AuthService } from '../../../../coreModule/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CartService } from '../../services/cartService/cart-service.service';
 import { AddressbookComponent } from '../addressbook/addressbook.component';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -16,7 +17,7 @@ export class HeaderComponent implements OnInit {
    * Cart products
    */
   public products = [];
-
+  cart$: Observable<any>;
   /**
    * Total products price
    */
@@ -37,6 +38,9 @@ export class HeaderComponent implements OnInit {
   }
 
   getCart(): void {
+    this.cart$ = this.cart.getCart();
+    console.log(this.cart$);
+
     this.cart.products.subscribe(data => {
       const products = JSON.parse(JSON.stringify(data));
       this.totalPrice = this.cart.totalPrice;
@@ -44,11 +48,12 @@ export class HeaderComponent implements OnInit {
         this.products = products;
       });
     });
+    this.cart.updateProducts();
+
+    console.log(this.products);
     console.log(this.totalPrice);
     // this.cart.updateProducts();
-    console.log(this.cart.productsSnapshot);
-    this.products = this.cart.productsSnapshot;
-    this.totalPrice = this.cart.totalPrice;
+    // this.totalPrice = this.cart.totalPrice;
     this.totalItems = this.products.length;
   }
 
