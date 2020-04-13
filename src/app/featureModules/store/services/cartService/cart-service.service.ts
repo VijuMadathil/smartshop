@@ -39,22 +39,29 @@ export class CartService {
         return prevValue + currProduct.items;
       }, 0);
     });
+
     // if(sessionFlow.userId === 'guest'){
     //   this.getProducts(sessionFlow.deviceId);
     // }
-    // this.dal.getAuth().onAuthStateChanged((data) => {
-    //   if(data == null){
-    //     this.userId = null;
-    //   }
-    //   if (data) {
-    //     this.userId = data.uid;
-    //     this.getProducts(this.userId);
-    //   }
-    // });
+    this.dal.getAuth().onAuthStateChanged((data) => {
+      if (data == null) {
+        this.userId = null;
+      }
+      if (data) {
+        this.userId = data.uid;
+        console.log(this.getProducts(this.userId));
+        this.getProducts(this.userId);
+      }
+    });
   }
 
+  // getCart1() {
+  //   this.userId = JSON.parse(localStorage.getItem('user')).uid;
+  //   return this.dal.getCart(this.userId);
+  // }
+
   /**
-   * Calls {@link getProducts} with user id if exists, otherwise device id 
+   * Calls {@link getProducts} with user id if exists, otherwise device id
    */
   updateProducts() {
     if (this.userId) {
@@ -66,52 +73,27 @@ export class CartService {
   }
 
   /**
-   * Get products from database and update on client
+   * Get products from cart database and update on client
    * @param id user id or device id
    */
   getProducts(id) {
-    this.dal.getBasketContent(id).subscribe( data => {
-      console.log(data);
-      // if (!data.exists()) {
-      //   this.products.next([]);
-      // }
-      // if (data.val()) {
-      //   const products = Object.keys(data.val()).map((key) => {
-      //     const item = data.val()[key];
-      //     item['idInBasket'] = key;
-      //     return item;
-      //   });
-      //   let ids = products.map(item => {
-      //     return item['id'];
-      //   });
-      //   let queryObj = {
-      //     query: {
-      //       ids: {
-      //         values: ids
-      //       }
-      //     }
-      //   };
-      //   this.dal.getProductsByIds(queryObj).subscribe( data => {
-      //     if (data.val()) {
-      //       let result = [];
-      //       for(let i = 0; i < products.length; i++) {
-      //         for(let j = 0; j < data.val().length; j++){
-      //           let product = data.val()[j];
-      //           if(products[i]['id'] === product['_id']){
-      //             products[i]['product'] = product['_source'];
-      //             result.push(products[i]);
-      //           }
-      //         }
-      //       }
-      //       this.products.next(result);
-      //     }
-      //   });
-      // }
+    this.dal.getBasketContent(id).then((doc) => {
+      if (doc.exists) {
+          const cartData = doc.data().cart;
+          this.products.next(cartData);
+          // return doc.data();
+      } else {
+          // doc.data() will be undefined in this case
+          this.products.next([]);
+          console.log('No Cart products');
+      }
+    }).catch((error) => {
+        console.log('Error getting Cart details:', error);
     });
   }
 
   /**
-   * Add product to database
+   * Add product to cart database
    * @param Object product object of product
    */
   addProduct(product) {
@@ -131,13 +113,16 @@ export class CartService {
       newBasket.push(product);
     }
     this.productsSnapshot = newBasket;
-    console.log(this.userId);
     // console.log(this.products);
     if (this.userId) {
       this.dal.setNewBasket(this.userId, newBasket).subscribe(data => {
         this.getProducts(this.userId);
       });
     }
+    this.basketHistory.next({
+      action: 'added',
+      product
+    });
   }
 
   /**
@@ -146,5 +131,52 @@ export class CartService {
    */
   addToCart(product: Product) {
     this.addProduct(product);
+  }
+
+  /**
+   * Remove product from basket
+   * @param product product to remove
+   */
+  removeProduct(product) {
+    const newBasket = this.productsSnapshot.reduce((prevArray, basketProduct) => {
+      if (basketProduct.productName === product.productName) {
+        if (basketProduct.items > 1) {
+          basketProduct.items--;
+          prevArray.push(basketProduct);
+          return prevArray;
+        } else {
+          return prevArray;
+        }
+      } else {
+        prevArray.push(basketProduct);
+        return prevArray;
+      }
+    }, []);
+    if (this.userId) {
+      this.dal.setNewBasket(this.userId, newBasket).subscribe(data => {});
+      this.getProducts(this.userId);
+    }
+  }
+
+  /**
+   * Remove all items of specific product in basket
+   * @param product specific product
+   */
+  removeAllProductItems(product) {
+    const newBasket = this.productsSnapshot.reduce((prevArray, basketProduct) => {
+      if (basketProduct.productName === product.productName) {
+          return prevArray;
+      }
+      prevArray.push(basketProduct);
+      return prevArray;
+    }, []);
+    if (this.userId) {
+      this.dal.setNewBasket(this.userId, newBasket).subscribe(data => {});
+      this.getProducts(this.userId);
+    } else {
+      console.log('Not logged in');
+      // this.dal.setNewBasket(this.sessionFlow.deviceId, newBasket).subscribe(data => {});
+      // this.getProducts(this.sessionFlow.deviceId);
+    }
   }
 }

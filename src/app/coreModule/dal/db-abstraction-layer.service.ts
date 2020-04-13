@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Product } from '../../featureModules/store/components/products/product.modal';
@@ -7,6 +7,7 @@ import { FirebaseService } from '../connectors/firebase/firebase.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Subject } from 'rxjs';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +15,7 @@ export class DbAbstractionLayerService {
   product: Product;
   productsCollectionRef: AngularFirestoreCollection<Product>;
   products$: Observable<Product[]>;
-  constructor(private afs: AngularFirestore, private connector: FirebaseService) {
+  constructor(protected zone: NgZone, private afs: AngularFirestore, public authService: AuthService, private connector: FirebaseService) {
     this.productsCollectionRef = this.afs.collection<Product>('products');
    }
 
@@ -30,8 +31,47 @@ export class DbAbstractionLayerService {
           );
   }
 
+  getCart(userId) {
+    // return this.afs.collection<any>('basket').doc(userId).get().then(function(doc) {
+    //   if (doc.exists) {
+    //     console.log("Document data:", doc.data());
+    //   } else {
+    //     console.log("No such document!");
+    //   }
+    // })
+    console.log(this.afs.collection<any>('basket').doc(userId));
+    this.afs.collection<any>('basket').doc(userId).valueChanges().pipe( map (action =>
+      {
+        console.log(action);
+      })
+    );
+    // this.afs.collection<any>('basket').doc(userId).get().pipe( action =>
+    //   console.log(action);
+    // );
+    // this.afs.collection<any>('basket').doc(userId).get().then(function(doc) {
+    //   if (doc.exists) {
+    //       console.log("Document data:", doc.data());
+    //   } else {
+    //       // doc.data() will be undefined in this case
+    //       console.log("No such document!");
+    //   }
+    // })
+
+    return this.afs.collection<any>('basket').snapshotChanges().pipe(
+      map(actions => {
+        console.log(actions);
+        return actions.map(action => {
+          const data = action.payload.doc.data();
+          const id = action.payload.doc.id;
+          console.log({ id, ...data });
+          return { id, ...data };
+        });
+      })
+    );
+  }
+
   addProduct(product: Product) {
-    this.productsCollectionRef.add(product);
+    this.connector.addProduct(product);
   }
   deleteProduct(product: Product) {
     this.productsCollectionRef.doc(product.id).delete();
@@ -39,12 +79,12 @@ export class DbAbstractionLayerService {
 
   /**
    * Returns basket content of specific user
-   * 
-   * @param {string} userId user Id
-   * 
-   * @returns {Observable} Observable of basket
+   *
+   * @param string userId user Id
+   *
+   * @returns Observable Observable of basket
    */
-  getBasketContent(id){
+  getBasketContent(id) {
     return this.connector.getBasketContent(id);
   }
 
@@ -81,9 +121,18 @@ export class DbAbstractionLayerService {
   /**
    * Set new basket by user id or device id
    * @param id  userId or deviceId
-   * @param newBasket
+   * @param newBasket newBasket
    */
   setNewBasket(id, newBasket) {
     return this.connector.setNewBasket(id, newBasket);
+  }
+
+  /**
+   * Returns User subject
+   *
+   * @returns User Information
+   */
+  getAuth() {
+    return this.authService.getAuth();
   }
 }

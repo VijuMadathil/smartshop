@@ -4,9 +4,11 @@ import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Product } from '../../../featureModules/store/components/products/product.modal';
-import { Subject } from 'rxjs';
+import { Subject, observable } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -19,12 +21,60 @@ export class FirebaseService {
 
   private orderSubject: Subject<any> = new Subject();
 
-  private databaseCollection: AngularFirestoreCollection<any>;
+  private productCollection: AngularFirestoreCollection<any>;
+  private cartCollection: AngularFirestoreCollection<any>;
+  private cartHistoryCollection: AngularFirestoreCollection<any>;
+  private genCategoryCollection: AngularFirestoreCollection<any>;
+  private orderCollection: AngularFirestoreCollection<any>;
 
   private auth = AngularFireAuth;
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore, private authService: AuthService) {
+    this.productCollection = this.afs.collection<any>('products');
+    this.cartCollection = this.afs.collection<any>('basket');
+    this.cartHistoryCollection = this.afs.collection<any>('basket-history');
+    this.genCategoryCollection = this.afs.collection<any>('general-category');
+    this.orderCollection = this.afs.collection<any>('orders');
+   }
 
+  /**
+   * Returns basket content of specific user
+   *
+   * @param string userId user Id
+   *
+   * @returns Observable Observable of basket
+   */
+  getBasketContent(userId) {
+    const basketRef = this.cartCollection.doc(userId).ref;
+    return basketRef.get();
+  }
+
+  /**
+   * Returns User subject
+   *
+   * @returns User Information
+   */
+  getUser() {
+    return JSON.parse(localStorage.getItem('user'));
+  }
+
+  ////////////// After Edits
+  /**
+   * Add product to database
+   *
+   * @param Object product product Object
+   */
+  addProduct(product) {
+    this.productCollection.add(product);
+  }
+  /**
+   * Add general category to database
+   *
+   * @param FormGroup generalCategoryForm form of general category
+   */
+  addGeneralCategory(generalCategoryForm: FormGroup){
+    this.genCategoryCollection.add(generalCategoryForm.value);
+  }
   /**
    * Initialize basket history for user. If you want to track basket history run this method when user sign in
    *
@@ -36,7 +86,7 @@ export class FirebaseService {
       this.basketHistorySubscription$.unsubscribe();
     }
     this.basketHistorySubscription$ = this.basketHistory$.subscribe( data => {
-      this.afs.collection<any>('/basket-history/' + userId).add(data);
+      this.cartHistoryCollection.doc(userId).set(data);
     });
   }
 
@@ -56,50 +106,40 @@ export class FirebaseService {
    *
    * @returns Observable Rx Observable of basket history
    */
-  getBasketHistoryById(userId){
-    return this.afs.collection<any>('/basket-history/' + userId).snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(action => {
-          const data = action.payload.doc.data() as Product;
-          const id = action.payload.doc.id;
-          return { id, ...data };
-        });
-      })
-    );
+  getBasketHistoryById(userId): Observable<any> {
+    return this.cartHistoryCollection.doc(userId).get();
   }
-
   /**
-   * Set new basket by user id
+   * Set new basket by user id or device id
    * @param id  userId or deviceId
    * @param newBasket newBasket
    *
    * @returns Observable Observable of basket
    */
-  setNewBasket(id, newBasket) {
-    return Observable.create( observer => {
-      this.afs.collection<any>('/basket-history/' + id).add(newBasket).then( data => {
+  setNewBasket(id, newBasket): Observable<any> {
+    const basket = {
+            cart: newBasket
+          };
+    return new Observable ( observer => {
+      this.cartCollection.doc(id).set(basket).then( data => {
+          observer.next(data);
+          observer.complete();
+        });
+    });
+  }
+  /**
+   * Save new order to database
+   *
+   * @param Object paymentData
+   *
+   * @returns Observable Observable of orders
+   */
+  saveOrder(paymentData) {
+    return new Observable ( observer => {
+      this.orderCollection.add(paymentData).then( data => {
         observer.next(data);
         observer.complete();
       });
     });
-  }
-
-  /**
-   * Returns basket content of specific user
-   *
-   * @param string userId user Id
-   *
-   * @returns Observable Observable of basket
-   */
-  getBasketContent(userId){
-    return this.afs.collection<any>('/basket/' + userId).snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(action => {
-          const data = action.payload.doc.data() as Product;
-          const id = action.payload.doc.id;
-          return { id, ...data };
-        });
-      })
-    );
   }
 }

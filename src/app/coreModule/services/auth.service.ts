@@ -125,4 +125,9 @@ export class AuthService {
     });
   }
 
+  // Return Auth
+  getAuth() {
+    return this.afAuth.auth;
+  }
+
 }

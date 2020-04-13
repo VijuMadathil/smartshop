@@ -25,7 +25,8 @@ export class HeaderComponent implements OnInit {
   public totalItems = 0;
   constructor(public authService: AuthService, protected cart: CartService, protected zone: NgZone, public dialog: MatDialog) {
     this.user = JSON.parse(localStorage.getItem('user'));
-    this.getCart();
+    // this.cart.getProducts(this.user);
+    this.getCartContents();
   }
 
   ngOnInit(): void {
@@ -37,24 +38,41 @@ export class HeaderComponent implements OnInit {
     return this.products.map(t => t.productPrice * t.items).reduce((acc, value) => acc + value, 0);
   }
 
-  getCart(): void {
-    this.cart$ = this.cart.getCart();
-    console.log(this.cart$);
-
+  getCartContents(): void {
     this.cart.products.subscribe(data => {
       const products = JSON.parse(JSON.stringify(data));
-      this.totalPrice = this.cart.totalPrice;
+      // this.totalPrice = this.cart.totalPrice;
       this.zone.run(() => {
         this.products = products;
       });
+      this.totalPrice = this.getTotalCost();
+      this.totalItems = this.products.length;
+      this.cart.updateProducts();
     });
-    this.cart.updateProducts();
+  }
 
-    console.log(this.products);
-    console.log(this.totalPrice);
-    // this.cart.updateProducts();
-    // this.totalPrice = this.cart.totalPrice;
-    this.totalItems = this.products.length;
+  /**
+   * Increment number of specific product
+   * @param productIndex index of product in array
+   */
+  incItems(product) {
+    this.cart.addProduct(product);
+  }
+
+  /**
+   * Decrement number of specific product
+   * @param productIndex index of product in array
+   */
+  decItems(productIndex) {
+    this.cart.removeProduct(this.products[productIndex]);
+  }
+
+  /**
+   *
+   * @param item basketProduct
+   */
+  removeProduct(item) {
+    this.cart.removeAllProductItems(item);
   }
 
   openAddressBook(): void {
