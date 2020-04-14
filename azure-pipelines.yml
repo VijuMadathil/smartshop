@@ -26,6 +26,10 @@ steps:
     pwd
     echo $(Build.SourcesDirectory)
     ls $(Build.SourcesDirectory)
+    echo "dist"
+    ls $(Build.SourcesDirectory)/dist
+    echo "public"
+    ls $(Build.SourcesDirectory)/public
   displayName: 'npm install and build'
 
 # - task: CopyFiles@2
