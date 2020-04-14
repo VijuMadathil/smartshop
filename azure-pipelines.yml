@@ -25,7 +25,7 @@ steps:
     ng build --prod
     pwd
     echo $(Build.SourcesDirectory)
-    echo $(Build.SourcesDirectory/dist/)
+    ls $(Build.SourcesDirectory)
   displayName: 'npm install and build'
 
 # - task: CopyFiles@2
