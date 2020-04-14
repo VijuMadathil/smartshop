@@ -13,7 +13,7 @@
                 <img *ngIf="product.offerPrice" class="offerImg" src="assets/images/offer.png">
                 <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between start">
                     <div *ngIf="product.foodCategory">
-                        <mat-icon [ngClass]="{'veg':product.foodCategory==='veg', 'nonVeg':product.foodCategory==='NonVeg'}">radio_button_checked</mat-icon>
+                        <mat-icon [ngClass]="{'veg':product.foodCategory==='veg', 'nonVeg':product.foodCategory==='nonVeg'}">radio_button_checked</mat-icon>
                     </div>
                 </mat-card-header>
                 <mat-card-content fxLayout="column wrap"  fxLayoutAlign="center center">
