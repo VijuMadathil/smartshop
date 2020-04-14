@@ -29,6 +29,32 @@
     }
 }
 
+.footTypeIndicator {
+    color: green;
+    float: right;
+}
+
+.cardHeaderInfo {
+    margin: 0;
+    padding: 0;
+}
+
+.add2cart {
+    color: #faa403;
+    transition: all .35s ease-out;
+}
+.add2cart:hover {
+    color: #be7c01;
+    transform: scale(1.05);
+}
+
+.product:hover  {
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+}
+
+.grow { transition: all .35s ease-out; }
+.grow:hover { transform: scale(1.1); }
+
 app-search-bar {
     float: right;
 }
