@@ -12,11 +12,23 @@
 .cartImg {
     height: 35px;
     width: 35px;
-    margin-right: 10px;
-    margin-bottom: 3px;
+    // margin-right: 10px;
+    // margin-bottom: 3px;
 }
 
 .productCartBtn {
     height: 35px;
     width: 35px;
+}
+
+.mat-button {
+    outline: 0;
+}
+
+.mat-icon-button {
+    outline: 0;   
+}
+
+.mat-menu-item {
+    outline: 0;
 }

@@ -13,6 +13,32 @@
     margin-top: 5px;
 }
 
+.productInfo {
+    padding-top: 20px;
+    padding-bottom: 0px;
+}
+
+mat-card-title {
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgba(0, 0, 0, 0.521);
+}
+
+mat-card-subtitle {
+    font-family: Arial, Helvetica, sans-serif;
+    padding-bottom: 0px !important;
+}
+
+mat-card-content {
+    padding-bottom: 0px !important;
+}
+
+.mat-card-actions {
+    padding-bottom: 0;
+}
+
+.offerPrice {
+    text-decoration: line-through
+}
 .card-actions-container {
     float: right;
 }
@@ -29,16 +55,39 @@
     }
 }
 
-.footTypeIndicator {
+.veg {
+    position: absolute;
+    right: 10px;
+    top: 10px;
     color: green;
-    float: right;
+}
+.nonVeg {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: rgb(211, 16, 9);
 }
 
-.cardHeaderInfo {
-    margin: 0;
-    padding: 0;
+.foodTypeIndicator {
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
+.offerImg {
+    height: 90px;
+    top: 0;
+    left: 0;
+    margin-left: -10px;
+    margin-top: -15px;
+    position: absolute;
+    // margin: 0px -20px 20px -20px;
+    z-index: 1000;
+}
+.offerImg:hover {
+    -webkit-filter: drop-shadow(2px 2px 3px #888888);
+    filter: drop-shadow(2px 2px 3px #888888);
+}
 .add2cart {
     color: #faa403;
     transition: all .35s ease-out;

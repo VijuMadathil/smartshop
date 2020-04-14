@@ -73,6 +73,9 @@ export class DbAbstractionLayerService {
   addProduct(product: Product) {
     this.connector.addProduct(product);
   }
+  updateProduct(product: Product, id) {
+    this.connector.updateProduct(product, id);
+  }
   deleteProduct(product: Product) {
     this.productsCollectionRef.doc(product.id).delete();
   }

@@ -2,7 +2,7 @@
      fxLayout
      fxLayout.xs="column"
      fxLayoutAlign="space-around center"
-     fxLayoutGap="5px"
+     fxLayoutGap="2px"
      fxLayoutGap.xs="0">
     <mat-card>
         <div class="toolbar">
@@ -10,18 +10,25 @@
         </div>
         <div class="container" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="1px" fxLayoutAlign="center center">
             <mat-card class="product" fxFlex="22%" *ngFor="let product of products$ | async" [style.margin-top]="12">
+                <img *ngIf="product.offerPrice" class="offerImg" src="assets/images/offer.png">
                 <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between start">
-                    <!-- <div class="cardHeaderInfo"> -->
-                        <mat-card-title>{{  product.productName }}</mat-card-title>
-                        <mat-card-subtitle>PRICE: {{ product.productPrice }} &euro;</mat-card-subtitle>
-                    <!-- </div> -->
-                    <div>
-                        <mat-icon class="footTypeIndicator">radio_button_checked</mat-icon>
+                    <div *ngIf="product.foodCategory">
+                        <mat-icon [ngClass]="{'veg':product.foodCategory==='veg', 'nonVeg':product.foodCategory==='NonVeg'}">radio_button_checked</mat-icon>
                     </div>
                 </mat-card-header>
-                <mat-card-content fxLayoutAlign="center center">
+                <mat-card-content fxLayout="column wrap"  fxLayoutAlign="center center">
                     <img src="{{product.imageURL}}" class="grow align-self-start mr-1 img-thumbnail"
-                alt="{{product.productName}}">
+                    alt="{{product.productName}}">
+                    <div class="productInfo">
+                        <mat-card-title>{{ product.productName }}</mat-card-title>
+                        <!-- <mat-card-subtitle>PRICE:</mat-card-subtitle> -->
+                        <mat-card-subtitle fxLayout="row wrap">
+                            <h3 [ngClass]="{'offerPrice':product.offerPrice > 0}">{{ product.productPrice }} &euro; </h3><h3 *ngIf="product.foodCategory">{{product.offerPrice}} &euro;</h3>
+                        </mat-card-subtitle>
+                        <span>
+                            
+                        </span>
+                    </div>
                 </mat-card-content>
                 <div class="card-actions-container">
                     <mat-card-actions>

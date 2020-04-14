@@ -68,6 +68,14 @@ export class FirebaseService {
     this.productCollection.add(product);
   }
   /**
+   * Update product to database
+   *
+   * @param Object product product Object
+   */
+  updateProduct(product, id) {
+    this.productCollection.doc(id).ref.update(product);
+  }
+  /**
    * Add general category to database
    *
    * @param FormGroup generalCategoryForm form of general category

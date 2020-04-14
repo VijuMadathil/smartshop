@@ -32,19 +32,26 @@
             <div fxLayout="column" *ngFor="let product of products; let i = index">
                 <div>
                     <div fxLayout="row" fxLayoutAlign="space-between center">
-                        <div>
+                        <div fxLayout="column" fxFlex="25" xLayoutAlign="start center">
+                            <p>{{product.productName}}</p>
                             <img class="cartImg" [src]="product.imageURL">
                         </div>
+                        <div fxLayout="row" fxFlex="10" fxLayoutAlign="center center">
+                            <p>{{product.productPrice}} &euro;</p>
+                        </div>
+                        <!-- <span class="menu-spacer"></span> -->
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <p>{{product.productPrice}} x {{product.items}}={{product.items*product.productPrice}}</p>
+                            <mat-form-field appearance="fill" [style.width.px]=60>
+                                <mat-label>Qty</mat-label>
+                                <input matInput value={{product.items}} type="number" min="0" max="99" required>
+                            </mat-form-field>
                         </div>
-                        <span class="menu-spacer"></span>
-                        <div fxLayout="row" fxLayoutAlign="end end">
-                                <button mat-icon-button class="mat-elevation-z2" (click)="incItems(product)"><mat-icon>add</mat-icon></button>
-                                <button mat-icon-button class="mat-elevation-z2" (click)="decItems(i)"><mat-icon>remove</mat-icon></button>
+                        <div fxFlex="50">
+                            <button mat-icon-button class="mat-elevation-z1" (click)="decItems(i)"><mat-icon>edit</mat-icon></button>
+                            <button mat-icon-button (click)="removeProduct(product)"><mat-icon>delete</mat-icon></button>
                         </div>
-                        <div>
-                            <button mat-icon-button (click)="removeProduct(product)"><mat-icon>remove</mat-icon></button>
+                        <div fxFlex="5">
+                            {{product.items*product.productPrice}}
                         </div>
                     </div>
                     <mat-divider></mat-divider>

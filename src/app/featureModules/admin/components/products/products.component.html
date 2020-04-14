@@ -18,10 +18,25 @@
                 </mat-form-field>
                 <br>
                 <mat-form-field appearance="fill">
+                <mat-label>Offer Price</mat-label>
+                <input matInput formControlName="offerPrice" type="number">
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Food Category</mat-label>
+                    <select matNativeControl formControlName="foodCategory" required>
+                        <option value="Veg">Veg</option>
+                        <option value="NonVeg">Non-Veg</option>
+                        <option value="Vegan">Vegan</option>
+                    </select>
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="fill">
                 <mat-label>Image Url</mat-label>
                 <input matInput formControlName="imageURL">
                 </mat-form-field>
             </div>
+            <button mat-stroked-button (click)="updateProduct()" [disabled]="!addProductForm.valid">Update Product</button>
             <button mat-stroked-button [disabled]="!addProductForm.valid" type="submit">Add Product</button>
         </form>
     </mat-card>
@@ -38,7 +53,7 @@
                 alt="{{product.productName}}">
                 </mat-card-content>
                 <mat-card-actions fxLayoutAlign="center center">
-                    <button mat-button><mat-icon aria-hidden="false" aria-label="Edit icon">edit</mat-icon></button>
+                    <button mat-button (click)="selectProduct(product)"><mat-icon aria-hidden="false" aria-label="Edit icon">edit</mat-icon></button>
                     <button mat-button (click)="deleteProduct(product)"><mat-icon aria-hidden="false" aria-label="Delete icon">delete</mat-icon></button>
                     <!-- <button mat-button>Edit</button>
                     <span class="material-icons">
