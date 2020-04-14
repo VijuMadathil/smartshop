@@ -31,12 +31,11 @@ steps:
     echo "public"
     ls $(Build.SourcesDirectory)/public
   displayName: 'npm install and build'
-
-# - task: CopyFiles@2
-#   inputs:
-#     sourceFolder: $(Build.SourcesDirectory/dist/)
-#     targetFolder: $(Build.ArtifactStagingDirectory)
-# - task: PublishBuildArtifacts@1
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: $(Build.SourcesDirectory)/dist/smartshop
+    targetFolder: $(Build.ArtifactStagingDirectory)
+- task: PublishBuildArtifacts@1
 #   inputs:
 #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
 #     ArtifactName: 'drop'
