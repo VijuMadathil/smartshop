@@ -22,7 +22,7 @@ steps:
   displayName: 'npm install and build'
 - task: CopyFiles@2
   inputs:
-    sourceFolder: $(Build.SourcesDirectory)
+    sourceFolder: $(Build.SourcesDirectory/dist/)
     targetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishBuildArtifacts@1
   inputs:
