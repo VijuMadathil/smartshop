@@ -9,6 +9,10 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  buildConfiguration: 'Release'
+  ngBuildConfiguration: '--prod'
+
 steps:
 - task: NodeTool@0
   inputs:
@@ -19,6 +23,7 @@ steps:
     npm install -g @angular/cli
     npm install
     ng build --prod
+    pwd
   displayName: 'npm install and build'
 - task: CopyFiles@2
   inputs:
