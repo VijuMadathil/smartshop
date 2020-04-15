@@ -36,13 +36,15 @@
                 <input matInput formControlName="imageURL">
                 </mat-form-field>
             </div>
-            <button mat-stroked-button (click)="updateProduct()" [disabled]="!addProductForm.valid">Update Product</button>
-            <button mat-stroked-button [disabled]="!addProductForm.valid" type="submit">Add Product</button>
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                <button mat-stroked-button (click)="updateProduct()" [disabled]="!addProductForm.valid">Update</button>
+                <button mat-stroked-button [disabled]="!addProductForm.valid" type="submit">Add</button>
+            </div>
         </form>
     </mat-card>
     <mat-card>
         <mat-toolbar color="secondary"></mat-toolbar>
-        <div class="container" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="center center">
+        <div class="container scrollable" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="center center">
             <mat-card class="product" fxFlex="22%" *ngFor="let product of products$ | async" [style.margin-top]="12">
                 <mat-card-header>
                     <mat-card-title>{{  product.productName }}</mat-card-title>

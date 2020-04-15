@@ -22,8 +22,8 @@ export class ProductsComponent {
     this.addProductForm = fb.group({
       productName: ['', [Validators.required]],
       productPrice: ['', [Validators.required, Validators.min(1), Validators.max(1000)]],
-      offerPrice: ['', [Validators.required, Validators.min(1), Validators.max(1000)]],
-      foodCategory: ['', [Validators.required]],
+      offerPrice: ['', [Validators.min(1), Validators.max(1000)]],
+      foodCategory: ['', []],
       imageURL: ['', [Validators.required]]
     });
     this.products$ = this.dbs.getProductList();
