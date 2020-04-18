@@ -1,11 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { HeaderComponent } from '../header/header.component';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { ModalComponent } from '../modal/modal.component';
-
-interface DialogData {
-  email: string;
-}
+import { Component } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,19 +10,12 @@ interface DialogData {
 })
 export class DashboardComponent {
 
-  email: string;
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
 
-  constructor(public dialog: MatDialog) {}
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ModalComponent, {
-      width: '300px',
-      data: {}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.email = result;
-    });
-  }
+  constructor(private breakpointObserver: BreakpointObserver) {}
 
 }

@@ -2,9 +2,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 import { DbAbstractionLayerService } from 'src/app/coreModule/dal/db-abstraction-layer.service';
 import { Product } from '../../../store/components/products/product.modal';
+import { NotificationComponent } from 'src/app/sharedModule/components/notification/notification.component';
 
 @Component({
   selector: 'app-products',
@@ -43,7 +43,7 @@ export class ProductsComponent {
     this.dbs.updateProduct(this.addProductForm.value, this.selProduct.id);
     this.snackBar.openFromComponent(NotificationComponent, {
       duration: this.durationInSeconds * 1300,
-      data: 'Updated the product' + this.addProductForm.value.productName
+      data: 'Updated the product ' + this.addProductForm.value.productName
     });
   }
 
@@ -64,23 +64,23 @@ export class ProductsComponent {
   }
 }
 
-/**
- * @title Snack-bar with a custom component
- */
-@Component({
-  selector: 'app-notification',
-  template: `
-    <span class="notifcation">
-      {{data}}!!!
-    </span>
-  `,
-  styles: [`
-    .notifcation {
-      color: white;
-    }
-  `],
-})
-export class NotificationComponent {
-  durationInSeconds = 5;
-  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) { }
-}
+// /**
+//  * @title Snack-bar with a custom component
+//  */
+// @Component({
+//   selector: 'app-notification',
+//   template: `
+//     <span class="notifcation">
+//       {{data}}!!!
+//     </span>
+//   `,
+//   styles: [`
+//     .notifcation {
+//       color: white;
+//     }
+//   `],
+// })
+// export class NotificationComponent {
+//   durationInSeconds = 5;
+//   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) { }
+// }

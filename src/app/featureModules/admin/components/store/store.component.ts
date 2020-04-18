@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-store',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./store.component.scss']
 })
 export class StoreComponent implements OnInit {
+
+  @ViewChild('drawer', { static: false })
+  drawer: MatSidenav;
 
   constructor() { }
 

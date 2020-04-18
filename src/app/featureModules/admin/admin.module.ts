@@ -18,6 +18,13 @@ import { ProductsComponent } from './components/products/products.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { StoreComponent } from './components/store/store.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { AnalyticsComponent } from './components/components/analytics/analytics.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -27,7 +34,8 @@ import { StoreComponent } from './components/store/store.component';
     ModalComponent,
     ProductsComponent,
     CategoriesComponent,
-    StoreComponent
+    StoreComponent,
+    AnalyticsComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +43,13 @@ import { StoreComponent } from './components/store/store.component';
     CustomMaterialModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   entryComponents: [ModalComponent]
 })

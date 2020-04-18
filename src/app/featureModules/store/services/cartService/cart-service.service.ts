@@ -33,7 +33,7 @@ export class CartService {
       this.productsSnapshot = products;
       this.totalPrice = 0;
       this.totalPrice = products.reduce((prevValue, currProduct) => {
-        return prevValue + currProduct.items * currProduct.product.price;
+        return prevValue + currProduct.items * currProduct.productPrice;
       }, 0);
       this.totalItems = products.reduce((prevValue, currProduct) => {
         return prevValue + currProduct.items;
